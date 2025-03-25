@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/font-awesome/css/font-awesome.css";
+
+body {
+  background-color: rgb(5, 10, 24);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
