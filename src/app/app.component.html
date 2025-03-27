@@ -36,7 +36,7 @@
            [attr.data-index]="i" 
            [attr.data-status]="i === activeIndex ? 'active' : i < activeIndex ? 'before' : 'after'">
     <div class="article-image-section article-section">
-      <div class="placeholder-image" [ngClass]="'image-' + (i+1)" [appLazyLoad]="'/SidSpaceWebsite/placeholder' + (i === 0 ? '' : (i+1)) + '.jpg'"></div>
+      <div class="placeholder-image" [ngClass]="'image-' + (i+1)" [appLazyLoad]="'/placeholder' + (i === 0 ? '' : (i+1)) + '.jpg'"></div>
     </div>
     <div class="article-description-section article-section">
       <!-- About Me section -->
@@ -115,7 +115,7 @@
       </div>
     </div>
     <div class="article-title-section article-section">
-      <div class="title-container" (click)="handleTitleContainerClick($event)">
+      <div class="title-container">
         <h2>{{ article.title | uppercase }}</h2>
       </div>
     </div>
@@ -130,4 +130,14 @@
       </div>
     </div>
   </article>
+  
+  <!-- Mobile navigation buttons (reusing the same nav buttons styling) -->
+  <div class="mobile-nav-container" *ngIf="activeIndex !== undefined">
+    <button class="nav-mobile-button left" (click)="handleLeftClick()" aria-label="Previous slide">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+    <button class="nav-mobile-button right" (click)="handleRightClick()" aria-label="Next slide">
+      <i class="fa fa-arrow-right"></i>
+    </button>
+  </div>
 </main>

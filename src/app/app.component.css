@@ -31,7 +31,7 @@ nav {
 #nav-social-section { gap: 3rem; }
 
 .logo-icon {
-  background: url("/SidSpaceWebsite/Logo.png") no-repeat center/contain;
+  background: url("/Logo.png") no-repeat center/contain;
   height: 60px;
   width: 60px;
   display: block;
@@ -102,10 +102,10 @@ article {
   width: 100%;
 }
 
-.image-1 { background-image: url("/SidSpaceWebsite/placeholder.jpg"); }
-.image-2 { background-image: url("/SidSpaceWebsite/placeholder2.jpg"); }
-.image-3 { background-image: url("/SidSpaceWebsite/placeholder3.jpg"); }
-.image-4 { background-image: url("/SidSpaceWebsite/placeholder4.jpg"); }
+.image-1 { background-image: url("/placeholder.jpg"); }
+.image-2 { background-image: url("/placeholder2.jpg"); }
+.image-3 { background-image: url("/placeholder3.jpg"); }
+.image-4 { background-image: url("/placeholder4.jpg"); }
 
 .article-description-section {
   padding: 0 0.5rem;
@@ -173,6 +173,44 @@ h3 {
 
 .nav-buttons button:focus {
   outline: none;
+}
+
+/* Mobile nav container - hidden on desktop */
+.mobile-nav-container {
+  display: none; /* Hidden by default, shown only on mobile */
+}
+
+/* Mobile nav buttons - using the same styling as desktop but positioned differently */
+.nav-mobile-button {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: var(--hover-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  transition: background-color 0.2s ease;
+}
+
+.nav-mobile-button.left {
+  left: 10px;
+}
+
+.nav-mobile-button.right {
+  right: 10px;
+}
+
+.nav-mobile-button:active {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
 }
 
 /* ===== ARTICLE STATES ===== */
@@ -375,6 +413,11 @@ nav a:active {
   article {
     grid-template-columns: 1.5fr 1fr;
   }
+  
+  /* Hide mobile navigation on tablet */
+  .mobile-only .nav-buttons {
+    display: none;
+  }
 }
 
 /* Mobile styles */
@@ -459,6 +502,41 @@ nav a:active {
     display: none;
   }
   
+  /* Mobile title container */
+  .title-container {
+    justify-content: center;
+    padding: 0.5rem;
+    position: relative;
+  }
+
+  .title-container h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .title-container:before,
+  .title-container:after {
+    display: none;
+  }
+  
+  .title-container i {
+    display: none;
+  }
+  
+  /* Mobile navigation buttons */
+  .mobile-nav-container {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .nav-mobile-button {
+    pointer-events: auto;
+  }
+  
   /* Mobile tab adjustments */
   .tabs-header {
     flex-wrap: wrap;
@@ -479,7 +557,6 @@ nav a:active {
   
   /* Mobile touch targets */
   .tab-button, 
-  .nav-buttons button,
   nav a {
     padding: 0.8rem;
     min-height: 44px;
@@ -490,10 +567,6 @@ nav a:active {
   }
   
   /* Other mobile adjustments */
-  .nav-buttons {
-    margin-top: auto;
-  }
-  
   .loader {
     width: 36px;
     height: 36px;
@@ -502,43 +575,6 @@ nav a:active {
   .theme-toggle {
     margin-left: 0;
     font-size: 1.2rem;
-  }
-  
-  .title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0.5rem;
-    position: relative; /* For positioning buttons */
-  }
-  
-  .title-container h2 {
-    font-size: 1.8rem;
-    text-align: center;
-    padding: 0 50px; /* Make room for buttons */
-  }
-
-  .title-container:before,
-  .title-container:after {
-    content: "";
-    font-family: "FontAwesome";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: var(--hover-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 5;
-  }
-  
-  .title-container i {
-    display: none;
   }
 }
 
@@ -550,5 +586,9 @@ nav a:active {
   
   .nav-container {
     background-color: var(--bg-color);
+  }
+  
+  .title-container h2 {
+    font-size: 1.5rem;
   }
 }

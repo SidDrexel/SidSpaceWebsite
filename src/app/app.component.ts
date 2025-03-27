@@ -237,22 +237,8 @@ export class AppComponent implements OnInit {
     }
   }
   
-  // Handle title container clicks for mobile navigation
-  handleTitleContainerClick(event: MouseEvent): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
-    const container = event.currentTarget as HTMLElement;
-    const containerRect = container.getBoundingClientRect();
-    
-    // Check if click is on left side (first 25% of container)
-    if (event.clientX < containerRect.left + (containerRect.width * 0.25)) {
-      this.handleLeftClick();
-    } 
-    // Check if click is on right side (last 25% of container)
-    else if (event.clientX > containerRect.right - (containerRect.width * 0.25)) {
-      this.handleRightClick();
-    }
-  }
+  // We don't need this method anymore since we have explicit buttons
+  // It's been replaced by the direct button click handlers
   
   handleLeftClick(): void {
     this.activeIndex = (this.activeIndex - 1 + this.articles.length) % this.articles.length;
