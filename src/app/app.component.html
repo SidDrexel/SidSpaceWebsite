@@ -36,7 +36,7 @@
            [attr.data-index]="i" 
            [attr.data-status]="i === activeIndex ? 'active' : i < activeIndex ? 'before' : 'after'">
     <div class="article-image-section article-section">
-      <div class="placeholder-image" [ngClass]="'image-' + (i+1)" [appLazyLoad]="'/placeholder' + (i === 0 ? '' : (i+1)) + '.jpg'"></div>
+      <div class="placeholder-image" [ngClass]="'image-' + (i+1)" [appLazyLoad]="'/SidSpaceWebsite/placeholder' + (i === 0 ? '' : (i+1)) + '.jpg'"></div>
     </div>
     <div class="article-description-section article-section">
       <!-- About Me section -->
