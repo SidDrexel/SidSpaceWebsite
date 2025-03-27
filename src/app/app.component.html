@@ -1,46 +1,133 @@
-<nav>
+<!-- Loading overlay -->
+<div class="loading-container" [class.hidden]="!isLoading">
+  <div class="loader"></div>
+</div>
+
+<!-- Single navigation bar -->
+<nav [class.menu-open]="isMobileMenuOpen">
+  <button class="hamburger-menu mobile-only" (click)="toggleMobileMenu()" aria-label="Toggle navigation menu">
+    <i class="fa" [ngClass]="isMobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+  </button>
+  
   <div id="nav-logo-section" class="nav-section">
-    <a href="#">
-      <span class="logo-icon"></span>
-    </a>
+    <a href="#"><span class="logo-icon"></span></a>
   </div>
   <div id="nav-link-section" class="nav-section">
-    <a href="#">ABOUT</a>
-    <a href="#">WORK</a>
+    <a href="#" (click)="downloadResume($event)">MY RESUME</a>
   </div>
   <div id="nav-social-section" class="nav-section">
-    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-    <a href="#"><i class="fa-brands fa-codepen"></i></a>
+    <a *ngFor="let social of socialLinks"
+       [href]="social.url"
+       [attr.aria-label]="social.label">
+      <i [class]="social.icon"></i>
+    </a>
+    <button class="theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
+      <i class="fa" [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
+    </button>
   </div>
   <div id="nav-contact-section" class="nav-section">
-    <a href="#">GET IN TOUCH</a>
+    <a href="mailto:siddhant.shivdikar@gmail.com">GET IN TOUCH</a>
   </div>
 </nav>
 
 <main>
-  <article #slide *ngFor="let article of articles; let i = index" 
+  <!-- Dynamic Articles -->
+  <article *ngFor="let article of articles; let i = index" 
            [attr.data-index]="i" 
-           [attr.data-status]="i === 0 ? 'active' : 'inactive'">
+           [attr.data-status]="i === activeIndex ? 'active' : i < activeIndex ? 'before' : 'after'">
     <div class="article-image-section article-section">
-      <div class="placeholder-image" [ngClass]="'image-' + (i + 1)"></div>
+      <div class="placeholder-image" [ngClass]="'image-' + (i+1)" [appLazyLoad]="'/placeholder' + (i === 0 ? '' : (i+1)) + '.jpg'"></div>
     </div>
     <div class="article-description-section article-section">
-      <p>
-        This is a sample paragraph with some descriptive text. It provides
-        information about the article and gives context to the reader.
-      </p>
+      <!-- About Me section -->
+      <div *ngIf="article.id === 'about'" class="content-container">
+        <p *ngFor="let paragraph of aboutMeContent">{{ paragraph }}</p>
+      </div>
+      
+      <!-- Education section -->
+      <div *ngIf="article.id === 'education'" class="tabs-container">
+        <div class="tabs-header">
+          <div *ngFor="let tab of educationTabs"
+              class="tab-button"
+              [class.active]="educationTab === tab.id"
+              (click)="educationTab = tab.id">
+            {{ tab.name }}
+          </div>
+        </div>
+        <div class="tabs-content">
+          <div *ngFor="let tab of educationTabs" 
+               class="tab-panel" 
+               [class.active]="educationTab === tab.id">
+            <h3>{{ tab.school }}</h3>
+            <p>{{ tab.degree }}</p>
+            <p>{{ tab.location }}</p>
+            <p>{{ tab.details }}</p>
+            <p *ngIf="tab.achievement">{{ tab.achievement }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Experience section -->
+      <div *ngIf="article.id === 'experience'" class="tabs-container">
+        <div class="tabs-header">
+          <div *ngFor="let tab of experienceTabs"
+              class="tab-button"
+              [class.active]="experienceTab === tab.id"
+              (click)="experienceTab = tab.id">
+            {{ tab.name }}
+          </div>
+        </div>
+        <div class="tabs-content">
+          <div *ngFor="let tab of experienceTabs" 
+               class="tab-panel" 
+               [class.active]="experienceTab === tab.id">
+            <h3>{{ tab.company }}</h3>
+            <p>{{ tab.position }}</p>
+            <p>{{ tab.location }}</p>
+            <ul>
+              <li *ngFor="let item of tab.responsibilities">{{ item }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Projects section -->
+      <div *ngIf="article.id === 'projects'" class="tabs-container">
+        <div class="tabs-header">
+          <div *ngFor="let tab of projectTabs"
+              class="tab-button"
+              [class.active]="projectsTab === tab.id"
+              (click)="projectsTab = tab.id">
+            {{ tab.name }}
+          </div>
+        </div>
+        <div class="tabs-content">
+          <div *ngFor="let tab of projectTabs" 
+               class="tab-panel" 
+               [class.active]="projectsTab === tab.id">
+            <h3>{{ tab.title }}</h3>
+            <p>{{ tab.description }}</p>
+            <ul>
+              <li *ngFor="let item of tab.highlights">{{ item }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="article-title-section article-section">
       <div class="title-container">
-        <h2>Article Title {{i + 1}}</h2>
-        <i class="fa fa-plus"></i>
+        <h2>{{ article.title | uppercase }}</h2>
+        <i class="fa fa-{{ article.icon }}" aria-hidden="true"></i>
       </div>
     </div>
     <div class="article-nav-section article-section">
       <div class="nav-buttons">
-        <button (click)="handleLeftClick()"><i class="fa fa-arrow-left"></i></button>
-        <button (click)="handleRightClick()"><i class="fa fa-arrow-right"></i></button>
+        <button (click)="handleLeftClick()" aria-label="Previous slide">
+          <i class="fa fa-arrow-left"></i>
+        </button>
+        <button (click)="handleRightClick()" aria-label="Next slide">
+          <i class="fa fa-arrow-right"></i>
+        </button>
       </div>
     </div>
   </article>

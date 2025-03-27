@@ -1,21 +1,111 @@
 @import "../node_modules/font-awesome/css/font-awesome.css";
 
+/* ===== THEME VARIABLES ===== */
+:root {
+  --bg-color: rgb(5, 10, 24);
+  --text-color: white;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-color: #b1d8ff;
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --tab-inactive-color: rgba(255, 255, 255, 0.7);
+  --loader-color: #FFF;
+}
+
+:root.light-theme {
+  --bg-color: #f5f5f7;
+  --text-color: #333;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #0066cc;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  --tab-inactive-color: rgba(0, 0, 0, 0.7);
+  --loader-color: #333;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* { box-sizing: border-box; }
+
 body {
-  background-color: rgb(5, 10, 24);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   height: 100vh;
   margin: 0;
   overflow: hidden;
-}
-
-* {
-  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: "Rubik", sans-serif;
 }
 
 app-root {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+/* ===== TYPOGRAPHY BASICS ===== */
+h1, h2, h3, a, p, span, li {
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  color: var(--text-color);
+  margin: 0;
+}
+
+a { text-decoration: none; }
+
+/* ===== THEME TRANSITION ===== */
+.theme-transition {
+  animation: themeChange 0.5s ease;
+}
+
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes themeChange {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(30deg);
+}
+
+/* ===== MOBILE BASICS ===== */
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
   }
+  
+  body, app-root {
+    overflow: hidden;
+    height: 100vh;
+  }
+}
