@@ -438,6 +438,7 @@ nav a:active {
     padding: 0.5rem 0;
     border-top: 1px solid var(--border-color);
     border-left: none;
+    position: relative; 
   }
   
   .article-description-section {
@@ -455,11 +456,7 @@ nav a:active {
   }
   
   .article-nav-section {
-    grid-row: 4;
-    height: 60px;
-    position: relative;
-    border-left: none;
-    border-top: 1px solid var(--border-color);
+    display: none;
   }
   
   /* Mobile tab adjustments */
@@ -508,11 +505,36 @@ nav a:active {
   }
   
   .title-container {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+    position: relative; /* For positioning buttons */
   }
   
   .title-container h2 {
     font-size: 1.8rem;
+    text-align: center;
+    padding: 0 50px; /* Make room for buttons */
+  }
+
+  .title-container:before,
+  .title-container:after {
+    content: "";
+    font-family: "FontAwesome";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: var(--hover-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
   }
   
   .title-container i {

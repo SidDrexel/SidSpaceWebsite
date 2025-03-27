@@ -115,9 +115,8 @@
       </div>
     </div>
     <div class="article-title-section article-section">
-      <div class="title-container">
+      <div class="title-container" (click)="handleTitleContainerClick($event)">
         <h2>{{ article.title | uppercase }}</h2>
-        <i class="fa fa-{{ article.icon }}" aria-hidden="true"></i>
       </div>
     </div>
     <div class="article-nav-section article-section">
