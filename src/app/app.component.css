@@ -31,7 +31,7 @@ nav {
 #nav-social-section { gap: 3rem; }
 
 .logo-icon {
-  background: url("/Logo.png") no-repeat center/contain;
+  background: url("/SidSpaceWebsite/Logo.png") no-repeat center/contain;
   height: 60px;
   width: 60px;
   display: block;
@@ -102,10 +102,10 @@ article {
   width: 100%;
 }
 
-.image-1 { background-image: url("/placeholder.jpg"); }
-.image-2 { background-image: url("/placeholder2.jpg"); }
-.image-3 { background-image: url("/placeholder3.jpg"); }
-.image-4 { background-image: url("/placeholder4.jpg"); }
+.image-1 { background-image: url("/SidSpaceWebsite/placeholder.jpg"); }
+.image-2 { background-image: url("/SidSpaceWebsite/placeholder2.jpg"); }
+.image-3 { background-image: url("/SidSpaceWebsite/placeholder3.jpg"); }
+.image-4 { background-image: url("/SidSpaceWebsite/placeholder4.jpg"); }
 
 .article-description-section {
   padding: 0 0.5rem;
